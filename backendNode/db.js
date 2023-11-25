@@ -1,3 +1,4 @@
+// Adicionando o banco de dados MySQL
 import mysql from "mysql";
 
 export const db = mysql.createConnection({

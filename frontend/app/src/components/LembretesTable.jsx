@@ -4,6 +4,7 @@ import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { RingLoader } from "react-spinners";
 
+// Início styled-components
 const CampoVazio = styled.div`
   display: flex;
   align-items: center;
@@ -29,16 +30,22 @@ const LembretesField = styled.div`
   flex-wrap: wrap;
 `;
 
-const LembretesTable = ({ setLembretes, lembretes, edit, setEdit }) => {
+// Fim styled-components
+
+const LembretesTable = ({ setLembretes, lembretes }) => {
+  // Efeito de loading sobre os lembretes utilizando react spinners
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
 
+    // Função de recebimento dos lembretes por meio do db, acontece após alterações no setLembretes
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8800"); // Ajuste a URL conforme necessário
+        const response = await axios.get("http://localhost:8800");
+        // data recebe o get
         const data = response.data;
+        // setLembretes recebe data
         setLembretes(data);
         setLoading(false);
       } catch (error) {
@@ -50,6 +57,7 @@ const LembretesTable = ({ setLembretes, lembretes, edit, setEdit }) => {
     fetchData();
   }, [setLembretes]);
 
+  // Loop foreach de agrupamento que cria um objeto e vão sendo feitos pushs para ele
   const agruparLembretesPelaData = (lembretes) => {
     const lembretesAgrupados = {};
 
@@ -66,8 +74,10 @@ const LembretesTable = ({ setLembretes, lembretes, edit, setEdit }) => {
     return lembretesAgrupados;
   };
 
+  // recebe lembretes como parâmetro
   const lembretesAgrupados = agruparLembretesPelaData(lembretes);
 
+  // função de deletar o lembrete e de filtragem (retirada do lembrete excluído) por "newArray"
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:8800/${id}`);
@@ -95,9 +105,11 @@ const LembretesTable = ({ setLembretes, lembretes, edit, setEdit }) => {
       )}
       {!loading && (
         <>
+          {/* Caso exista lembretes, mostrar. Caso contrário, a lista está vazia */}
           {lembretes && Object.entries(lembretesAgrupados).length > 0 ? (
             <>
               <h2>Seus Lembretes:</h2>
+              {/* Map é feito baseado nas datas formatadas */}
               {Object.entries(lembretesAgrupados).map(([dataFormatada, lembretesPorData]) => (
                 <div key={dataFormatada}>
                   <h2>{dataFormatada}</h2>
@@ -105,6 +117,7 @@ const LembretesTable = ({ setLembretes, lembretes, edit, setEdit }) => {
                     {lembretesPorData.map((lembrete, i) => (
                       <LembreteBlock key={i}>
                         <p>{lembrete.lembrete}</p>
+                        {/* Ícone de lixeira */}
                         <FaTrash style={{ cursor: "pointer" }} onClick={() => handleDelete(lembrete.id)} />
                       </LembreteBlock>
                     ))}

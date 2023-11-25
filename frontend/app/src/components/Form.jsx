@@ -3,6 +3,8 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 
+// Início styled-components
+
 const FormSt = styled.form`
   display: flex;
   margin: 20px;
@@ -36,18 +38,22 @@ const ButtonSt = styled.button`
     color: white;
   }
 `;
+// Fim styled-components
 
-const Form = ({ setEdit, puxarLembrete }) => {
+const Form = ({ puxarLembrete }) => {
   const ref = useRef();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // utilização do ref para pegar campos do usuário
     const user = ref.current;
 
+    // Validação dos inputs pelo próprio browser
     if (user.lembreteTexto.value === "" || user.lembreteData.value === "") {
       return window.alert("Preencha todos os campos!");
     } else {
+      // Validação data futura, diferença entre data do lembrete x data atual
       const dataAtual = new Date();
       const dataUsuario = new Date(user.lembreteData.value);
 
@@ -57,16 +63,18 @@ const Form = ({ setEdit, puxarLembrete }) => {
       }
     }
 
+    // Método de criação de lembretes recendo os valores do input, com o id de cada lembrete sendo gerado pelo uuid
     await axios.post("http://localhost:8800", {
       lembrete: user.lembreteTexto.value,
       data: user.lembreteData.value,
       id: uuidv4(),
     });
 
+    // Apaga os dados do campo após criar
     user.lembreteTexto.value = "";
     user.lembreteData.value = "";
 
-    setEdit(null);
+    // Execução do get de lembretes
     puxarLembrete();
   };
 
