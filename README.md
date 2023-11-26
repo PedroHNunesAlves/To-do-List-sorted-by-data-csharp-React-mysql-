@@ -16,7 +16,7 @@ https://github.com/PedroHNunesAlves/testepraticodti/assets/127517961/b30a9a95-91
 
 2. Na pasta frontend, executar os seguintes comandos:
   ```
-  cd /app
+  cd app
   ```
   ```
   npm run dev
