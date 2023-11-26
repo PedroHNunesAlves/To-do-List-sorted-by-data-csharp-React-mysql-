@@ -33,7 +33,7 @@ https://github.com/PedroHNunesAlves/testepraticodti/assets/127517961/b30a9a95-91
   ```
   create table lembretesdti
   (
-    id varchar(250) PK,
+    id varchar(250) PRIMARY KEY,
     lembrete varchar(200),
     data date
   )
