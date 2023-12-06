@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaEdit } from "react-icons/fa";
 import { RingLoader } from "react-spinners";
 
 // Início styled-components
@@ -32,7 +32,7 @@ const LembretesField = styled.div`
 
 // Fim styled-components
 
-const LembretesTable = ({ setLembretes, lembretes }) => {
+const LembretesTable = ({ setLembretes, lembretes, setEdit }) => {
   // Efeito de loading sobre os lembretes utilizando react spinners
   const [loading, setLoading] = useState(true);
 
@@ -77,6 +77,10 @@ const LembretesTable = ({ setLembretes, lembretes }) => {
   // recebe lembretes como parâmetro
   const lembretesAgrupados = agruparLembretesPelaData(lembretes);
 
+  const handleEdit = (lembrete) => {
+    setEdit(lembrete);
+  };
+
   // função de deletar o lembrete e de filtragem (retirada do lembrete excluído) por "newArray"
   const handleDelete = async (id) => {
     try {
@@ -118,6 +122,7 @@ const LembretesTable = ({ setLembretes, lembretes }) => {
                       <LembreteBlock key={i}>
                         <p>{lembrete.lembrete}</p>
                         {/* Ícone de lixeira */}
+                        <FaEdit style={{ cursor: "pointer" }} onClick={() => handleEdit(lembrete)} />
                         <FaTrash style={{ cursor: "pointer" }} onClick={() => handleDelete(lembrete.id)} />
                       </LembreteBlock>
                     ))}

@@ -28,6 +28,22 @@ export const criarLembrete = (req, res) => {
   });
 };
 
+// PUT
+
+export const editarLembrete = (req, res) => {
+  const queryQ = "UPDATE lembretesdti SET `lembrete` = ?, `data` = ? WHERE `id` = ?";
+
+  const values = [req.body.lembrete, req.body.data];
+
+  db.query(queryQ, [...values, req.params.id], (err) => {
+    if (err) {
+      return res.json(err);
+    } else {
+      return res.status(200).json("Lembrete Atualizado!!!!!!!!!!!!  ");
+    }
+  });
+};
+
 // DELETE
 export const deletarLembrete = (req, res) => {
   const queryQ = "DELETE FROM lembretesdti WHERE `id` = ?";

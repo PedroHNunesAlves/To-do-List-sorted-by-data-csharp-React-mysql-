@@ -7,6 +7,7 @@ import LembretesTable from "./components/LembretesTable";
 function App() {
   // UseState para guardar os lembretes
   const [lembretes, setLembretes] = useState([]);
+  const [edit, setEdit] = useState(null);
 
   // Função assíncrona de get dos dados no bd utilizando axios
   const puxarLembrete = async () => {
@@ -40,8 +41,8 @@ function App() {
   return (
     <>
       {/* FORM para o campo de inclusão de novos lembretes e LembretesTable para imprimir os dados no browser */}
-      <Form setLembretes={setLembretes} puxarLembrete={puxarLembrete} />
-      <LembretesTable setLembretes={setLembretes} lembretes={lembretes} />
+      <Form setLembretes={setLembretes} puxarLembrete={puxarLembrete} edit={edit} setEdit={setEdit} />
+      <LembretesTable setLembretes={setLembretes} lembretes={lembretes} edit={edit} setEdit={setEdit} />
     </>
   );
 }

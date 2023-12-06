@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pedro\\MyProjects\\testecsharp\\backendcsharp\\backendcsharp.csproj": {}
+    "C:\\Users\\pedro\\MyProjects\\testessss\\testepraticodti\\backendcsharp\\backendcsharp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pedro\\MyProjects\\testecsharp\\backendcsharp\\backendcsharp.csproj": {
+    "C:\\Users\\pedro\\MyProjects\\testessss\\testepraticodti\\backendcsharp\\backendcsharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pedro\\MyProjects\\testecsharp\\backendcsharp\\backendcsharp.csproj",
+        "projectUniqueName": "C:\\Users\\pedro\\MyProjects\\testessss\\testepraticodti\\backendcsharp\\backendcsharp.csproj",
         "projectName": "backendcsharp",
-        "projectPath": "C:\\Users\\pedro\\MyProjects\\testecsharp\\backendcsharp\\backendcsharp.csproj",
+        "projectPath": "C:\\Users\\pedro\\MyProjects\\testessss\\testepraticodti\\backendcsharp\\backendcsharp.csproj",
         "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pedro\\MyProjects\\testecsharp\\backendcsharp\\obj\\",
+        "outputPath": "C:\\Users\\pedro\\MyProjects\\testessss\\testepraticodti\\backendcsharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pedro\\AppData\\Roaming\\NuGet\\NuGet.Config"

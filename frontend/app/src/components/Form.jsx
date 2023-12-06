@@ -40,8 +40,19 @@ const ButtonSt = styled.button`
 `;
 // Fim styled-components
 
-const Form = ({ puxarLembrete }) => {
+const Form = ({ puxarLembrete, edit, setEdit }) => {
   const ref = useRef();
+
+  useEffect(() => {
+    if (edit) {
+      const user = ref.current;
+
+      const editDataFormatada = new Date(edit.data).toISOString().split("T")[0];
+
+      user.lembreteTexto.value = edit.lembrete;
+      user.lembreteData.value = editDataFormatada;
+    }
+  }, [edit]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,12 +74,19 @@ const Form = ({ puxarLembrete }) => {
       }
     }
 
-    // Método de criação de lembretes recendo os valores do input, com o id de cada lembrete sendo gerado pelo uuid
-    await axios.post("http://localhost:8800", {
-      lembrete: user.lembreteTexto.value,
-      data: user.lembreteData.value,
-      id: uuidv4(),
-    });
+    if (edit) {
+      await axios.put("http://localhost:8800/" + edit.id, {
+        lembrete: user.lembreteTexto.value,
+        data: user.lembreteData.value,
+      });
+    } else {
+      // Método de criação de lembretes recendo os valores do input, com o id de cada lembrete sendo gerado pelo uuid
+      await axios.post("http://localhost:8800", {
+        lembrete: user.lembreteTexto.value,
+        data: user.lembreteData.value,
+        id: uuidv4(),
+      });
+    }
 
     // Apaga os dados do campo após criar
     user.lembreteTexto.value = "";
@@ -76,6 +94,7 @@ const Form = ({ puxarLembrete }) => {
 
     // Execução do get de lembretes
     puxarLembrete();
+    setEdit(null);
   };
 
   return (
